@@ -1,15 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Profiler } from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import MainProvider from "./components/MainProvider";
+import { onRender } from "./lib/profiler";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Profiler id="App" onRender={onRender}>
+      <BrowserRouter>
+        <MainProvider>
+          <App />
+        </MainProvider>
+      </BrowserRouter>
+    </Profiler>
   </React.StrictMode>
 );
 
